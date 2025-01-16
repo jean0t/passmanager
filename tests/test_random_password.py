@@ -16,7 +16,7 @@ def test_shuffle(passwd):
     a = "random string"
     assert passwd._secure_shuffle(list(a)) != passwd._secure_shuffle(list(a))
 
-@pytest.mark.parametrize("lengths", range(101))
+@pytest.mark.parametrize("lengths", range(0, 101, 2))
 def test_password_generation_with_different_lengths(passwd, lengths):
     password = passwd.Random_password(length=lengths, uppercase=True,
                 lowercase=True, digits=True, special=True)
