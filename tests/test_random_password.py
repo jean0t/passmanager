@@ -1,3 +1,6 @@
+import sys
+sys.dont_write_bytecode = True
+
 import pytest
 from random import choice
 from src.random_password import Password
@@ -32,13 +35,13 @@ def test_password_generation_with_different_lengths(passwd, lengths):
 def test_password_characters(passwd, length):
 
     password1 = passwd.Random_password(length=length, uppercase=True)
-    assert password1.isupper()
+    assert all(char in passwd.letters_uc for char in password1)
 
     password2 = passwd.Random_password(length=length, lowercase=True)
-    assert password2.islower()
+    assert all(char in passwd.letters_lc for char in password2)
 
     password3 = passwd.Random_password(length=length, digits=True)
-    assert password3.isdigit()
+    assert all(char in passwd.digits for char in password3)
 
     password4 = passwd.Random_password(length=length, special=True)
     assert all(char in passwd.special for char in password4)
@@ -52,5 +55,8 @@ def test_randomness_for_password(passwd, length):
 
     password2 = passwd.Random_password(length, uppercase=True,
                     lowercase=True, digits=True, special=True)
-
-    assert password1 != password2
+    
+    if length != 0:
+        assert password1 != password2
+    else:
+        assert password1 == "" and password2 == ""
