@@ -1,5 +1,7 @@
-from pathlib import Path
+import sys
+sys.dont_write_bytecode = True
 
+from pathlib import Path
 
 class Config:
     app_path = Path().home() / ".passmng"
