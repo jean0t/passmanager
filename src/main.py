@@ -21,10 +21,10 @@ class Passmanager:
         self.database = Database(password=password)
         try:
             self.database = Database(password=password)
-            Message.Success("User authenticated!")
+            Message.Success("[*] User authenticated!")
             sleep(1.5)
         except:
-            Message.Failure("User couldn't be authenticated!")
+            Message.Failure("[!] User couldn't be authenticated!")
             sleep(2)
             sys.exit(1)
 
@@ -67,11 +67,12 @@ class Passmanager:
                             digits=digits,
                             special=special,
                         )
-                        Message.Info("Your password was generated.")
+                        Message.Info("[*] Your password was generated and copied to the clipboard.")
+                        self.passwd.Clipboard_copy(passwd= result)
                         Message.Success(result)
                     except Exception as e:
                         print(e)
-                        Message.Failure("Operation was aborted")
+                        Message.Failure("[!] Operation was aborted")
 
                 case "query_one":
                     if len(prompt) == 2:
@@ -84,10 +85,10 @@ class Passmanager:
                                 comments=user.comments,
                             )
                         else:
-                            Message.Failure("Data not found.")
+                            Message.Failure("[!] Data not found.")
 
                     else:
-                        Message.Failure("Please provide an ID.")
+                        Message.Failure("[!] Please provide an ID.")
 
                 case "query_all":
                     users = self.database.Query_all()
@@ -101,16 +102,16 @@ class Passmanager:
                             )
                             print("\n\n")
                     else:
-                        Message.Failure("No data found in the database.")
+                        Message.Failure("[!] No data found in the database.")
 
                 case "remove":
                     if len(prompt) == 2:
                         if input("Are you sure? (y/N) ").strip().lower() != "y":
                             self.database.Remove(int(prompt[1]))
                         else:
-                            Message.Info("Operation aborted.")
+                            Message.Failure("[!] Operation aborted.")
                     else:
-                        Message.Failure("Please provide an ID.")
+                        Message.Failure("[!] Please provide an ID.")
 
                 case "update":
                     try:
@@ -121,11 +122,11 @@ class Passmanager:
                                 password=input("password: ").strip(),
                                 comments=input("comments: ").strip(),
                             )
-                            Message.Success("Updated Successfuly.")
+                            Message.Success("[*] Updated Successfully.")
                         else:
-                            Message.Failure("Please provide an ID.")
+                            Message.Failure("[!] Please provide an ID.")
                     except:
-                        Message.Failure("Operation aborted.")
+                        Message.Failure("[!] Operation aborted.")
 
                 case "add":
                     self.database.Add(
@@ -133,7 +134,7 @@ class Passmanager:
                         password=input("password: ").strip(),
                         comments=input("comments: ").strip(),
                     )
-                    Message.Success("Data added to database.")
+                    Message.Success("[*] Data added to database.")
 
                 case "clear":
                     system("clear")
