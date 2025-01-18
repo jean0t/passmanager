@@ -1,6 +1,6 @@
 import string
 import secrets as sc
-from message import Message
+from src.message import Message
 from argparse import ArgumentParser
 import os
 

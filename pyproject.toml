@@ -5,6 +5,7 @@ description = "A password manager with great security to help you secure your ac
 authors = ["jean0t <joaomouryf@hotmail.com>"]
 license = "GPL-3"
 readme = "README.md"
+packages = [{ include = "run.py" }, { include = "src/*.py" }, { include = "src/database/*.py" }]
 
 
 [tool.poetry.dependencies]
@@ -16,8 +17,8 @@ pyperclip = "^1.9.0"
 
 
 [tool.poetry.scripts]
-passmng = "run:main"
-mkpasswd = "src.random_password:main"
+passmanager = "run:main"
+makepasswd = "src.random_password:main"
 
 
 [build-system]

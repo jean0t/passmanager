@@ -1,9 +1,9 @@
 from termcolor import colored
 from getpass import getpass
-from database.database import Database
-from message import Message
-from random_password import Password
-from config import Config
+from src.database.database import Database
+from src.message import Message
+from src.random_password import Password
+from src.config import Config
 from os import system
 import sys
 from time import sleep

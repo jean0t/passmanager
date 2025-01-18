@@ -3,7 +3,7 @@ from sqlalchemy import create_engine
 from sqlalchemy import select
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import Session
-from database.model import Base, User
+from src.database.model import Base, User
 from src.config import Config
 from src.message import Message
 
