@@ -15,20 +15,25 @@ class Message:
         print(termcolor.colored(message, "light_yellow"))
 
     @staticmethod
-    def Query_result(id: int, name: str, password: str, comments: str) -> None:
+    def Query_result(
+        id: int,
+        name: str,
+        password: str,
+        comments: str,
+        name_width: int,
+        password_width: int,
+        comments_width: int,
+    ) -> None:
+        id_width = 5
         print(
-            termcolor.colored("id:\t", "light_yellow"),
-            termcolor.colored(f"{id}", "light_green"),
+            termcolor.colored(
+                f"{'ID':<{id_width}} {'NAME':<{name_width}} {'PASSWORD':<{password_width}} {'COMMENTS':<{comments_width}}",
+                "light_yellow",
+            )
         )
         print(
-            termcolor.colored("name:\t", "light_yellow"),
-            termcolor.colored(f"{name}", "light_green"),
-        )
-        print(
-            termcolor.colored("password:\t", "light_yellow"),
-            termcolor.colored(f"{password}", "light_green"),
-        )
-        print(
-            termcolor.colored("comments:\n\t", "light_yellow"),
-            termcolor.colored(f"{comments}", "light_green"),
+            termcolor.colored(
+                f"{id:<{id_width}} {name:<{name_width}} {password:<{password_width}} {comments:<{comments_width}}",
+                "light_green",
+            ),
         )
