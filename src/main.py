@@ -9,7 +9,7 @@ import sys
 from time import sleep
 
 
-class Passmanager():
+class Passmanager:
     def __init__(self):
         Config.configure_environment(Config.app_path)
         self.database = None
@@ -26,7 +26,6 @@ class Passmanager():
             sleep(2)
             sys.exit(1)
 
-
     def Menu(self):
         Message.Info("Use the command 'help' to see the commands")
         while True:
@@ -42,7 +41,7 @@ class Passmanager():
                     Message.Info("remove [ID] -> remove a specific data (Be careful!)")
                     Message.Info("clear -> clear the screen")
                     Message.Info("exit -> leaves the program")
-                
+
                 case "generate":
                     pass
 
@@ -66,21 +65,29 @@ class Passmanager():
 
                 case "update":
                     if len(prompt.split(" ")) == 2:
-                        self.database.Update(id= int(prompt.split(" ")[1]), username= input("username: ").strip(), password= input("password: ").strip(), comments= input("comments: ").strip())
+                        self.database.Update(
+                            id=int(prompt.split(" ")[1]),
+                            username=input("username: ").strip(),
+                            password=input("password: ").strip(),
+                            comments=input("comments: ").strip(),
+                        )
                         Message.Success("Updated Successfuly.")
                     else:
                         Message.Failure("Please provide an ID.")
 
                 case "add":
-                    self.database.Add(username= input("username: ").strip(), password= input("password: ").strip(), comments= input("comments: ").strip())
+                    self.database.Add(
+                        username=input("username: ").strip(),
+                        password=input("password: ").strip(),
+                        comments=input("comments: ").strip(),
+                    )
                     Message.Success("Data added to database.")
 
                 case "clear":
                     system("clear")
 
-
                 case "exit":
-                    self.database.Close()
+                    self.Exit()
                     exit(0)
 
     def Exit(self):
