@@ -13,6 +13,7 @@ class Passmanager:
     def __init__(self):
         Config.configure_environment(Config.app_path)
         self.database = None
+        self.passwd = Password()
 
     def Login(self):
         system("clear")
@@ -49,7 +50,17 @@ class Passmanager:
                     Message.Info("exit -> leaves the program")
 
                 case "generate":
-                    pass
+                    try:
+                        length = int(input("Length: "))
+                        if not length:
+                            raise ValueError("Length can't be null.")
+                        uppercase = input("Uppercase (Y/n): ").strip().lower() != "n"
+                        lowercase = input("Lowercase (Y/n): ").strip().lower() != "n"
+                        digits = input("Digits (Y/n): ").strip().lower() != "n"
+                        special = input("Special Characters (Y/n): ").strip().lower() != "n"
+                        result = self.passwd.Random_password(lenght=length, uppercase=uppercase, lowercase=lowercase, digits=digits, special=special)
+                    except:
+                        Message.Failure("Operation was aborted")
 
                 case "query_one":
                     if len(prompt) == 2:
@@ -83,7 +94,7 @@ class Passmanager:
 
                 case "remove":
                     if len(prompt) == 2:
-                        if input("Are you sure? (y/n) ").strip().lower() == "y":
+                        if input("Are you sure? (y/N) ").strip().lower() != "y":
                             self.database.Remove(int(prompt[1]))
                         else:
                             Message.Info("Operation aborted.")
@@ -91,16 +102,19 @@ class Passmanager:
                         Message.Failure("Please provide an ID.")
 
                 case "update":
-                    if len(prompt) == 2:
-                        self.database.Update(
-                            id=int(prompt.split(" ")[1]),
-                            username=input("username: ").strip(),
-                            password=input("password: ").strip(),
-                            comments=input("comments: ").strip(),
-                        )
-                        Message.Success("Updated Successfuly.")
-                    else:
-                        Message.Failure("Please provide an ID.")
+                    try:
+                        if len(prompt) == 2:
+                            self.database.Update(
+                                id=int(prompt.split(" ")[1]),
+                                username=input("username: ").strip(),
+                                password=input("password: ").strip(),
+                                comments=input("comments: ").strip(),
+                            )
+                            Message.Success("Updated Successfuly.")
+                        else:
+                            Message.Failure("Please provide an ID.")
+                    except:
+                        Message.Failure("Operation aborted.")
 
                 case "add":
                     self.database.Add(
