@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "passmanager"
+version = "2.0.0"
+description = "A password manager with great security to help you secure your accounts with practicality"
+authors = ["jean0t <joaomouryf@hotmail.com>"]
+license = "GPL-3"
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.13"
+sqlalchemy = "^2.0.37"
+termcolor = "^2.5.0"
+sqlcipher3 = "^0.5.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
