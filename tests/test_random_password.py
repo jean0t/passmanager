@@ -1,9 +1,11 @@
 import sys
+
 sys.dont_write_bytecode = True
 
 import pytest
 from random import choice
 from src.random_password import Password
+
 
 @pytest.fixture
 def passwd():
@@ -19,10 +21,12 @@ def test_shuffle(passwd):
     a = "random string"
     assert passwd._secure_shuffle(list(a)) != passwd._secure_shuffle(list(a))
 
+
 @pytest.mark.parametrize("lengths", range(0, 101, 2))
 def test_password_generation_with_different_lengths(passwd, lengths):
-    password = passwd.Random_password(length=lengths, uppercase=True,
-                lowercase=True, digits=True, special=True)
+    password = passwd.Random_password(
+        length=lengths, uppercase=True, lowercase=True, digits=True, special=True
+    )
 
     if lengths == 0:
         assert len(password) == 0
@@ -47,15 +51,16 @@ def test_password_characters(passwd, length):
     assert all(char in passwd.special for char in password4)
 
 
-
 def test_randomness_for_password(passwd, length):
-    
-    password1 = passwd.Random_password(length, uppercase=True,
-                    lowercase=True, digits=True, special=True)
 
-    password2 = passwd.Random_password(length, uppercase=True,
-                    lowercase=True, digits=True, special=True)
-    
+    password1 = passwd.Random_password(
+        length, uppercase=True, lowercase=True, digits=True, special=True
+    )
+
+    password2 = passwd.Random_password(
+        length, uppercase=True, lowercase=True, digits=True, special=True
+    )
+
     if length != 0:
         assert password1 != password2
     else:
