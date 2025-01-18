@@ -25,23 +25,27 @@ class Database:
             session.add(user)
             session.commit()
 
-    def Update(self, id: int, username: str, password: str, comments: str) -> None:
+    def Update(self, id: int, username: str = "", password: str = "", comments: str = "") -> None:
         with Session(self.engine) as session:
             user = session.get(User, id)
-            if username:
+            if username and user:
                 user.name = username
 
-            if password:
+            if password and user:
                 user.password = password
 
-            if comments:
+            if comments and user:
                 user.comments = comments
 
 
     def Query_one(self, id: int):
         with Session(self.engine) as session:
-            user = session.query(User).where(User.id == id)
-            Message.Query_result(id= user.id, name= user.name, password= user.password, comments= user.comments)
+            user = session.get(User, id)
+
+            if user:
+                Message.Query_result(id= user.id, name= user.name, password= user.password, comments= user.comments)
+            else:
+                Message.Failure("User not found!")
 
 
     def Query_all(self):
@@ -49,7 +53,7 @@ class Database:
             users = session.query(User).order_by(User.id).all()
             for user in users:
                 Message.Query_result(id= user.id, name= user.name, password= user.password, comments= user.comments)
-                print("-"*20)
+                print("\n" + "-"*20 + "\n")
 
 
     def Remove(self, id):
