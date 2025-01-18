@@ -57,9 +57,20 @@ class Passmanager:
                         uppercase = input("Uppercase (Y/n): ").strip().lower() != "n"
                         lowercase = input("Lowercase (Y/n): ").strip().lower() != "n"
                         digits = input("Digits (Y/n): ").strip().lower() != "n"
-                        special = input("Special Characters (Y/n): ").strip().lower() != "n"
-                        result = self.passwd.Random_password(lenght=length, uppercase=uppercase, lowercase=lowercase, digits=digits, special=special)
-                    except:
+                        special = (
+                            input("Special Characters (Y/n): ").strip().lower() != "n"
+                        )
+                        result = self.passwd.Random_password(
+                            length=length,
+                            uppercase=uppercase,
+                            lowercase=lowercase,
+                            digits=digits,
+                            special=special,
+                        )
+                        Message.Info("Your password was generated.")
+                        Message.Success(result)
+                    except Exception as e:
+                        print(e)
                         Message.Failure("Operation was aborted")
 
                 case "query_one":
