@@ -12,6 +12,12 @@ python = "^3.13"
 sqlalchemy = "^2.0.37"
 termcolor = "^2.5.0"
 sqlcipher3 = "^0.5.4"
+pyperclip = "^1.9.0"
+
+
+[tool.poetry.scripts]
+passmng = "run:main"
+mkpasswd = "src.random_password:main"
 
 
 [build-system]

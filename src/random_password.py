@@ -63,7 +63,7 @@ class Password:
             Message.Failure("[!] An Error Occurred When Copying The Password")
 
 
-if __name__ == "__main__":
+def main():
     try:
         # cli argument
         parser = ArgumentParser(prog="Password generator")
@@ -118,3 +118,7 @@ if __name__ == "__main__":
 
     except:
         pass
+
+
+if __name__ == "__main__":
+    main()
