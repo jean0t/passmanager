@@ -14,8 +14,8 @@ class User(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(50))
-    password: Mapped[str] = mapped_column(String(255))
-    comments: Mapped[str] = mapped_column(String(255))
+    password: Mapped[str] = mapped_column(String(200))
+    comments: Mapped[str] = mapped_column(String(200))
 
     def __repr__(self) -> str:
         return f"<User(name={self.name}, password={self.password},comments={self.comments}>"

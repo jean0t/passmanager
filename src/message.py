@@ -20,20 +20,20 @@ class Message:
         name: str,
         password: str,
         comments: str,
-        name_width: int,
-        password_width: int,
-        comments_width: int,
     ) -> None:
-        id_width = 5
         print(
-            termcolor.colored(
-                f"{'ID':<{id_width}} {'NAME':<{name_width}} {'PASSWORD':<{password_width}} {'COMMENTS':<{comments_width}}",
-                "light_yellow",
-            )
+            termcolor.colored("ID:\n", "light_yellow"),
+            termcolor.colored(str(id), "light_green"),
         )
         print(
-            termcolor.colored(
-                f"{id:<{id_width}} {name:<{name_width}} {password:<{password_width}} {comments:<{comments_width}}",
-                "light_green",
-            ),
+            termcolor.colored("NAME:\n", "light_yellow"),
+            termcolor.colored(name, "light_green"),
+        )
+        print(
+            termcolor.colored("PASSWORD:\n", "light_yellow"),
+            termcolor.colored(password, "light_green"),
+        )
+        print(
+            termcolor.colored("COMMENTS:\n", "light_yellow"),
+            termcolor.colored(comments, "light_green"),
         )

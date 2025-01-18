@@ -60,9 +60,6 @@ class Passmanager:
                                 name=user.name,
                                 password=user.password,
                                 comments=user.comments,
-                                name_width=len(user.name),
-                                password_width=len(user.password),
-                                comments_width=len(user.comments),
                             )
                         else:
                             Message.Failure("Data not found.")
@@ -79,9 +76,6 @@ class Passmanager:
                                 name=user.name,
                                 password=user.password,
                                 comments=user.comments,
-                                name_width=len(user.name),
-                                password_width=len(user.password),
-                                comments_width=len(user.comments),
                             )
                             print("\n\n")
                     else:
