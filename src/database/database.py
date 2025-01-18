@@ -16,14 +16,13 @@ class Database:
     
     def Add(self, username: str, password: str, comments: str) -> None:
         with Session(self.engine) as session:
-            user = User(
-                    name=username,
-                    password=password,
-                    comments=comments,
-                    )
-
-            session.add(user)
-            session.commit()
+            if username and password:
+                user = User(
+                        name=username,
+                        password=password,
+                        comments=comments,
+                        )
+                session.add(user)
 
     def Update(self, id: int, username: str = "", password: str = "", comments: str = "") -> None:
         with Session(self.engine) as session:
