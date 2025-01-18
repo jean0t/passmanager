@@ -10,8 +10,9 @@ from src.message import Message
 
 class Database:
     def __init__(self, password):
-        self.db_url = f"sqlite+pysqlcipher://:{password}/{Config.database_path}?cipher=aes-256-cfb&kdf_iter=400000"
+        self.db_url = f"sqlite+pysqlcipher://:{str(password)}@/{Config.database_path}?cipher=aes-256-cfb&kdf_iter=400000"
         self.engine = create_engine(self.db_url, module=sqlite)
+        self.query = None
         Base.metadata.create_all(self.engine)
 
     def Add(self, username: str, password: str, comments: str) -> None:
@@ -23,6 +24,7 @@ class Database:
                     comments=comments,
                 )
                 session.add(user)
+                session.commit()
 
     def Update(
         self, id: int, username: str = "", password: str = "", comments: str = ""
@@ -38,36 +40,25 @@ class Database:
             if comments and user:
                 user.comments = comments
 
+            session.commit()
+
     def Query_one(self, id: int):
         with Session(self.engine) as session:
-            user = session.get(User, id)
+            self.query = session.get(User, id)
 
-            if user:
-                Message.Query_result(
-                    id=user.id,
-                    name=user.name,
-                    password=user.password,
-                    comments=user.comments,
-                )
-            else:
-                Message.Failure("User not found!")
+        return self.query
 
     def Query_all(self):
         with Session(self.engine) as session:
-            users = session.query(User).order_by(User.id).all()
-            for user in users:
-                Message.Query_result(
-                    id=user.id,
-                    name=user.name,
-                    password=user.password,
-                    comments=user.comments,
-                )
-                print("\n" + "-" * 20 + "\n")
+            self.query = session.query(User).all()
+
+        return self.query
 
     def Remove(self, id):
         with Session(self.engine) as session:
             user = session.get(User, id)
             session.remove(user)
+            session.commit()
 
     def Close(self):
         self.engine.dispose()
