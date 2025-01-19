@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "passmanager"
-version = "2.0.0"
+version = "2.0.1"
 description = "A password manager with great security to help you secure your accounts with practicality"
 authors = ["jean0t <joaomouryf@hotmail.com>"]
 license = "GPL-3"
