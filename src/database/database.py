@@ -57,7 +57,7 @@ class Database:
     def Remove(self, id):
         with Session(self.engine) as session:
             user = session.get(User, id)
-            session.remove(user)
+            session.delete(user)
             session.commit()
 
     def Close(self):

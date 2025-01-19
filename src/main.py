@@ -67,8 +67,10 @@ class Passmanager:
                             digits=digits,
                             special=special,
                         )
-                        Message.Info("[*] Your password was generated and copied to the clipboard.")
-                        self.passwd.Clipboard_copy(passwd= result)
+                        Message.Info(
+                            "[*] Your password was generated and copied to the clipboard."
+                        )
+                        self.passwd.Clipboard_copy(passwd=result)
                         Message.Success(result)
                     except Exception as e:
                         print(e)
@@ -106,7 +108,7 @@ class Passmanager:
 
                 case "remove":
                     if len(prompt) == 2:
-                        if input("Are you sure? (y/N) ").strip().lower() != "y":
+                        if input("Are you sure? (y/N) ").strip().lower() == "y":
                             self.database.Remove(int(prompt[1]))
                         else:
                             Message.Failure("[!] Operation aborted.")
